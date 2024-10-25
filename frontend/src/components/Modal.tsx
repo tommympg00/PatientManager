@@ -1,13 +1,8 @@
-import {
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  Transition,
-} from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Fragment, type ReactNode } from "react";
+import { Dialog, DialogPanel, DialogTitle, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { Fragment, type ReactNode } from 'react';
 
-import { Subtitle } from ".";
+import { Subtitle } from '.';
 
 export type ModalProps = {
   show: boolean;
@@ -17,13 +12,7 @@ export type ModalProps = {
   footer: ReactNode;
 };
 
-export const Modal = ({
-  show,
-  onClose,
-  content,
-  header,
-  footer,
-}: ModalProps) => (
+export const Modal = ({ show, onClose, content, header, footer }: ModalProps) => (
   <Transition.Root show={show} as={Fragment}>
     <Dialog as="div" className="relative z-10" onClose={onClose}>
       <Transition.Child

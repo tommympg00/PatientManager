@@ -1,13 +1,9 @@
-import { RouteObject } from "react-router-dom";
+import { RouteObject } from 'react-router-dom';
 
-import { Layout } from "@/components";
+import { Layout } from '@/components';
 
-import { PATHS } from "./config";
-import {
-  NotFoundScreen,
-  PatientDetailScreen,
-  PatientsScreen,
-} from "./features";
+import { PATHS } from './config';
+import { NotFoundScreen, PatientDetailScreen, PatientsScreen } from './features';
 
 export const routes: RouteObject[] = [
   {
@@ -25,7 +21,7 @@ export const routes: RouteObject[] = [
         element: <PatientDetailScreen />,
         path: PATHS.patientDetail,
       },
-      { path: "*", element: <NotFoundScreen /> },
+      { path: '*', element: <NotFoundScreen /> },
     ],
   },
 ];

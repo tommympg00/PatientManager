@@ -1,1 +1,1 @@
-export * from "./Styled.type";
+export * from './Styled.type';

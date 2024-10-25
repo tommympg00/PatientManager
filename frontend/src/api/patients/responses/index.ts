@@ -1,1 +1,1 @@
-export * from "./listPatientsResponse.type";
+export * from './listPatientsResponse.type';
