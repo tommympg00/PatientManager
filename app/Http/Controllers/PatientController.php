@@ -26,14 +26,14 @@ class PatientController extends Controller
             'document_photo' => 'required|mimes:jpg,jpeg|max:2048',
         ]);
 
-        $document = $request->file('document_photo');
-        $document_photo_url = $this->storageService->store($document, 'patient-documents');
+        $documentPhoto = $request->file('document_photo');
+        $documentPhotoUrl = $this->storageService->store($request->file($documentPhoto), 'patient-documents');
 
         $patient = Patient::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone_number'],
-            'document_photo_path' => $document_photo_url,
+            'document_photo_path' => $documentPhotoUrl,
         ]);
 
         $patient->notify(new PatientRegisteredNotification($patient));
