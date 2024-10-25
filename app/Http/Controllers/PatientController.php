@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
+
+use App\Models\Patient;
+use App\Notifications\PatientRegisteredNotification;
+use App\Services\StorageService;
 
 class PatientController extends Controller
 {
+    protected $storageService;
+
+    public function __construct(StorageService $storageService)
+    {
+        $this->storageService = $storageService;
+    }
+
     public function store(Request $request)
-    {   
+    {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:patients,email',
@@ -19,8 +27,7 @@ class PatientController extends Controller
         ]);
 
         $document = $request->file('document_photo');
-        $path = Storage::disk('s3')->put('patient-documents', $document);
-        $document_photo_url = Storage::disk('s3')->url($path);
+        $document_photo_url = $this->storageService->store($document, 'patient-documents');
 
         $patient = Patient::create([
             'name' => $validatedData['name'],
@@ -29,7 +36,7 @@ class PatientController extends Controller
             'document_photo_path' => $document_photo_url,
         ]);
 
-        Mail::to($patient->email)->queue(new \App\Mail\PatientRegistered($patient));
+        $patient->notify(new PatientRegisteredNotification($patient));
 
         return response()->json(['message' => 'Patient registered successfully.', 'data' => $patient], 201);
     }

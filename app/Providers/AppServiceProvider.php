@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Services\StorageServiceInterface;
+use App\Services\StorageService;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -11,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(StorageServiceInterface::class, function ($app) {
+            return new StorageService('s3');
+        });
     }
 
     /**
