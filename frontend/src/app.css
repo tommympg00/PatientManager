@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --PRIMARY: #1f295b;
+    --PRIMARY_FOREGROUND: #ffffff;
+
+    --SECONDARY: #abc6ff;
+    --SECONDARY_FOREGROUND: #101425;
+
+    --ACCENT: #7381c9;
+
+    --DANGER: #e53e3e;
+    --DANGER_FOREGROUND: #ffffff;
+
+    --SUCCESS: #42e081;
+    --SUCCESS_FOREGROUND: #101425;
+
+    --BACKGROUND: #f4f5f8;
+    --BACKGROUND_SECONDARY: #eeeeee;
+    --FOREGROUND: #050506;
+  }
+}
+
+body {
+  overscroll-behavior: none;
+  color: var(--FOREGROUND);
+  background-color: var(--BACKGROUND);
+}
+
+p {
+  word-wrap: break-word;
+}
+
+/* Removes autofill styling */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-animation: autofill 0s forwards;
+  animation: autofill 0s forwards;
+  font-size: inherit;
+}
