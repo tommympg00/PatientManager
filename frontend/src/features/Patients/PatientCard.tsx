@@ -1,5 +1,5 @@
-import { type Patient } from "@/api";
-import { Avatar } from "@/components";
+import { type Patient } from '@/api';
+import { Avatar } from '@/components';
 
 type PatientCardProps = {
   patient: Patient;

@@ -1,12 +1,13 @@
+import { RouteObject } from "react-router-dom";
+
 import { Layout } from "@/components";
 
-import { RouteObject } from "react-router-dom";
+import { PATHS } from "./config";
 import {
   NotFoundScreen,
   PatientDetailScreen,
   PatientsScreen,
 } from "./features";
-import { PATHS } from "./config";
 
 export const routes: RouteObject[] = [
   {
