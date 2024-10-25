@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+    mysql:
+        image: mysql:latest
+        container_name: patient-manager-db
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - patient-net
+
+volumes:
+    db_data:
+
+networks:
+    patient-net:
