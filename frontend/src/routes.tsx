@@ -1,6 +1,12 @@
 import { Layout } from "@/components";
 
 import { RouteObject } from "react-router-dom";
+import {
+  NotFoundScreen,
+  PatientDetailScreen,
+  PatientsScreen,
+} from "./features";
+import { PATHS } from "./config";
 
 export const routes: RouteObject[] = [
   {
@@ -8,12 +14,17 @@ export const routes: RouteObject[] = [
     children: [
       {
         element: <div>Home</div>,
-        path: "/",
+        path: PATHS.home,
       },
       {
-        element: <div>About</div>,
-        path: "/about",
+        element: <PatientsScreen />,
+        path: PATHS.patients,
       },
+      {
+        element: <PatientDetailScreen />,
+        path: PATHS.patientDetail,
+      },
+      { path: "*", element: <NotFoundScreen /> },
     ],
   },
 ];

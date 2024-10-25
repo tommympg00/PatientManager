@@ -15,8 +15,6 @@ export default {
         accent: "var(--ACCENT)",
         background: "var(--BACKGROUND)",
         "background-secondary": "var(--BACKGROUND_SECONDARY)",
-        "chat-bubble": "var(--CHAT_BUBBLE)",
-        "chat-bubble-foreground": "var(--CHAT_BUBBLE_FOREGROUND)",
       },
     },
   },

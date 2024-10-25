@@ -38,14 +38,14 @@ class PatientController extends Controller
 
         $patient->notify(new PatientRegisteredNotification($patient));
 
-        return response()->json(['message' => 'Patient registered successfully.', 'data' => $patient], 201);
+        return response()->json(['success' => 'Patient registered successfully.', 'data' => $patient], 201);
     }
     public function show(Patient $patient)
     {
-        return response()->json($patient);
+        return response()->json(['success' => 'Patients fetched succesfully', 'data' => $patient]);
     }
     public function index()
     {
-        return response()->json(Patient::all());
+        return response()->json(['success' => 'Patients fetched succesfully.', 'data' => Patient::all()]);
     }
 }

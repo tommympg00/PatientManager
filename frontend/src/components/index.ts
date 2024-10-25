@@ -1,3 +1,4 @@
+export * from "./Avatar";
 export * from "./buttons";
 export * from "./Header";
 export * from "./Layout";
