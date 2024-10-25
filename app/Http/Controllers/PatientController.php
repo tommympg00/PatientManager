@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class PatientController extends Controller
 {
@@ -17,19 +18,20 @@ class PatientController extends Controller
             'document_photo' => 'required|mimes:jpg,jpeg|max:2048',
         ]);
 
-        $path = $request->file('document_photo')->store('documents', 'public');
-        $downloadUrl = asset('storage/' . $path);
+        $document = $request->file('document_photo');
+        $path = Storage::disk('s3')->put('patient-documents', $document);
+        $document_photo_url = Storage::disk('s3')->url($path);
 
         $patient = Patient::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone_number'],
-            'document_photo_path' => $downloadUrl,
+            'document_photo_path' => $document_photo_url,
         ]);
 
         Mail::to($patient->email)->queue(new \App\Mail\PatientRegistered($patient));
 
-        return response()->json(['message' => 'Patient registered successfully.'], 201);
+        return response()->json(['message' => 'Patient registered successfully.', 'data' => $patient], 201);
     }
     public function show(Patient $patient)
     {
