@@ -31,23 +31,27 @@
    cd PatientManager
    ```
 
-2. **Start the Application**:
+2. **Set up the environment**:
+
+   Copy the /backend/.env.example & /frontend/.env.example files on to their respective /backend/.env and /frontend/.env
+
+3. **Start the Application**:
 
    Run the following command to start both the frontend and backend services:
 
    ```bash
-   docker-compose up -d
+   docker-compose up
    ```
 
    - `docker-compose` will pull the necessary images, build the containers, and start the app.
 
-3. **Manually set up minio storage bucket (will be automatic on a future iteration)**:
+4. **Manually set up minio storage bucket (will be automatic on a future iteration)**:
 
    Go to the minio [console](http://localhost:9090) and log in with the ./backend/env credentials `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`. There create the bucket with the same name that we have on the backend/.env `MINIO_BUCKET`.
 
    This is not optimal but I did not have the time to create the entrypoint script.
 
-4. **Seed the Database (Optional)**:
+5. **Seed the Database (Optional)**:
 
    Once the containers are running, seed the database to have dummy data
 
@@ -55,7 +59,7 @@
    docker-compose exec backend php artisan db:seed
    ```
 
-5. **Access the Application**:
+6. **Access the Application**:
 
    - **Frontend**: Open `http://localhost:3000` in your browser.
    - **Backend API**: Access the API at `http://localhost:8000`.
