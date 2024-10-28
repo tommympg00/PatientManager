@@ -47,7 +47,7 @@ class PatientController extends Controller
         ]);
 
         $documentPhoto = $request->file('document_photo');
-        $documentPhotoUrl = $this->storageService->store($documentPhoto, 'patient-documents');
+        $documentPhotoUrl = $this->storageService->store('/', $documentPhoto);
 
         $patient = Patient::create([
             'name' => $validatedData['name'],

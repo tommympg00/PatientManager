@@ -13,6 +13,8 @@ services:
       - minio
     volumes:
       - ./backend:/api
+    networks:
+      default: {}
   frontend:
     build:
       context: ./frontend
@@ -23,6 +25,7 @@ services:
       - ./frontend/.env
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     depends_on:
       - backend
   mysql:
@@ -34,6 +37,8 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      default: {}
   minio:
     image: "minio/minio:latest"
     ports:
@@ -43,9 +48,15 @@ services:
       - ./backend/.env
     volumes:
       - "minio:/data/minio"
-    command: minio server /data/minio --console-address ":9090"
+    networks:
+      default: {}
+    command: minio server /data/minio --console-address :9090 --address 0.0.0.0:9000
 volumes:
   db_data:
     driver: local
   minio:
     driver: local
+networks:
+  default:
+    attachable: true
+    name: patient-manager-network

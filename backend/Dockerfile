@@ -32,9 +32,14 @@ RUN chown -R www-data:www-data /api \
 # Install Laravel dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Run Laravel migrations and start PHP-FPM
-CMD php artisan migrate --force && php artisan queue:work & php-fpm
+# Copy the entrypoint script and make it executable
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Expose port 8000 (default for PHP-FPM)
 EXPOSE 8000
+
+# Run the entrypoint script
+CMD ["/entrypoint.sh"]
+
 

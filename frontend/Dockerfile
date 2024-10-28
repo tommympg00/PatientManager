@@ -1,15 +1,13 @@
-FROM node:23
-
-RUN npm install -g pnpm
+FROM node:23.1.0
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package*.json ./
 
-RUN pnpm install --frozen-lockfile
+RUN yarn install
 
-COPY . ./app
+COPY . .
 
 EXPOSE 3000
 
-CMD ["pnpm", "dev"]
+CMD ["yarn", "server"]

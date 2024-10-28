@@ -6,10 +6,14 @@ use Illuminate\Support\Facades\Storage;
 
 class StorageService implements StorageServiceInterface
 {
-    public function store($document, $directory)
+    public function store($directory, $document)
     {
-        //TodO Check
         $path = Storage::disk()->put($directory, $document);
-        return Storage::disk()->url($path);
+
+        $bucketName = env('MINIO_BUCKET');
+
+        $partialPath = rtrim(Storage::disk()->url('/'), '/') . "/{$bucketName}/" . ltrim($path, '/');
+
+        return $partialPath;
     }
 }
