@@ -27,7 +27,7 @@
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/@tommympg00/PatientManager.git
+   git clone https://github.com/tommympg00/PatientManager.git
    cd PatientManager
    ```
 
