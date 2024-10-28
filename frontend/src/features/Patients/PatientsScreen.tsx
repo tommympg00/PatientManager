@@ -62,11 +62,13 @@ export const PatientsScreen = () => {
         </div>
       )}
 
-      {data?.length && !isError ? (
+      {(data ?? []).length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
           {data?.map((patient) => <PatientCard key={patient.id} patient={patient} />)}
         </div>
-      ) : (
+      )}
+
+      {!data?.length && !isLoading && !isError && (
         <div className="flex flex-col items-center justify-center h-full">
           <UserIcon className="h-16 w-16 text-gray-400" />
           <p className="text-2xl text-gray-600 mt-4">No patients found</p>
