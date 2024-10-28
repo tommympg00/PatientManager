@@ -64,19 +64,11 @@ export const CreatePatientModal = ({ show, onClose }: CreatePatientModalProps) =
 
   const modalContent = (
     <div className="p-6 space-y-4">
-      <Input
-        id="name"
-        label="Name"
-        placeholder="John Doe"
-        required
-        {...register('name')}
-        errors={errors}
-      />
+      <Input id="name" label="Name" placeholder="John Doe" {...register('name')} errors={errors} />
       <Input
         id="email"
         label="Email"
         placeholder="jhonDoe@email.com"
-        required
         errors={errors}
         {...register('email')}
       />
@@ -85,28 +77,20 @@ export const CreatePatientModal = ({ show, onClose }: CreatePatientModalProps) =
           id="phone.countryCode"
           label="Country Code"
           placeholder="+598"
-          required
           containerClassName="w-2/5 sm:w-1/4 mb-0"
           {...register('phone.countryCode')}
+          errors={errors}
         />
         <Input
           id="phone.number"
           label="Phone Number"
           placeholder="99749722"
           containerClassName="w-3/5 sm:w-3/4 mb-0"
-          required
+          errors={errors}
           {...register('phone.number')}
         />
       </div>
       <span className="w-full text-sm text-gray-400">Enter country code in the format +1</span>
-      <div className="flex flex-col">
-        {errors.phone?.countryCode && (
-          <span className="text-red-500 text-sm">{errors.phone.countryCode.message}</span>
-        )}
-        {errors.phone?.number && (
-          <span className="text-red-500 text-sm">{errors.phone.number.message}</span>
-        )}
-      </div>
 
       <FileDropzone
         setUploadedFile={(file) => setValue('documentPhoto', file)}

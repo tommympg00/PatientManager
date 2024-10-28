@@ -3,7 +3,7 @@ import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from 'react';
 import { ButtonVariant } from '@/config';
 import { cn } from '@/utils';
 
-import { Spinner } from '..';
+import { Spinner } from '.';
 
 const BUTTON_VARIANT_CLASSES: {
   [key in ButtonVariant]: string;

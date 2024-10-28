@@ -1,5 +1,4 @@
-export * from './Avatar';
-export * from './buttons';
+export * from './Button';
 export * from './FileDropzone';
 export * from './Header';
 export * from './Input';
