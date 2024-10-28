@@ -41,9 +41,9 @@
 
    - `docker-compose` will pull the necessary images, build the containers, and start the app.
 
-3. **Manually set up minio storage bucket (will be automatic on a future iteration)**
+3. **Manually set up minio storage bucket (will be automatic on a future iteration)**:
 
-   Go to the minio [console](http://localhost:9090) and log in with the .env credentials. There create the bucket with the same name that we have on the backend/.env `MINIO_BUCKET`.
+   Go to the minio [console](http://localhost:9090) and log in with the ./backend/env credentials `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`. There create the bucket with the same name that we have on the backend/.env `MINIO_BUCKET`.
 
    This is not optimal but I did not have the time to create the entrypoint script.
 
