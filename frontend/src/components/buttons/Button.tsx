@@ -41,7 +41,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       type={type}
       disabled={disabled ?? loading}
       className={cn(
-        'flex flex-row items-center justify-center gap-5 rounded-md px-4 py-2 font-medium',
+        'flex flex-row items-center justify-center gap-2 rounded-md px-4 py-2 font-medium',
         (disabled ?? loading) ? '!bg-disabled cursor-not-allowed opacity-40' : 'hover:opacity-75',
         BUTTON_VARIANT_CLASSES[variant],
         className

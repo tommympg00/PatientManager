@@ -15,15 +15,6 @@ type CreatePatientModalProps = {
 };
 
 export const CreatePatientModal = ({ show, onClose }: CreatePatientModalProps) => {
-  const onSubmit = (data: CreatePatientFormSchema) => {
-    const payload: CreatePatientPayload = {
-      ...data,
-      phoneNumber: `${data.phone.countryCode} ${data.phone.number}`,
-    };
-
-    mutate(payload);
-  };
-
   const handleClose = () => {
     setTimeout(() => {
       reset({
@@ -36,13 +27,24 @@ export const CreatePatientModal = ({ show, onClose }: CreatePatientModalProps) =
     onClose();
   };
 
+  const onSubmit = (data: CreatePatientFormSchema) => {
+    const payload: CreatePatientPayload = {
+      ...data,
+      phoneNumber: `${data.phone.countryCode}${data.phone.number}`,
+    };
+
+    mutate(payload);
+  };
+
   const { mutate, isLoading } = useMutation({
     mutationFn: (data: CreatePatientPayload) => {
       return PatientsApi.create(data);
     },
     onSuccess: (data) => {
       toast.success(`Patient ${data.name} created successfully`);
-      onClose();
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      localStorage.setItem('users', JSON.stringify([...users, data]));
+      handleClose();
     },
     onError: (error) => {
       toast.error(parseApiError(error));
@@ -84,14 +86,14 @@ export const CreatePatientModal = ({ show, onClose }: CreatePatientModalProps) =
           label="Country Code"
           placeholder="+598"
           required
-          containerClassName="w-1/4 mb-0"
+          containerClassName="w-2/5 sm:w-1/4 mb-0"
           {...register('phone.countryCode')}
         />
         <Input
           id="phone.number"
           label="Phone Number"
           placeholder="99749722"
-          containerClassName="w-3/4 mb-0"
+          containerClassName="w-3/5 sm:w-3/4 mb-0"
           required
           {...register('phone.number')}
         />
@@ -99,16 +101,16 @@ export const CreatePatientModal = ({ show, onClose }: CreatePatientModalProps) =
       <span className="w-full text-sm text-gray-400">Enter country code in the format +1</span>
       <div className="flex flex-col">
         {errors.phone?.countryCode && (
-          <span className="text-red-500 text-xs">{errors.phone.countryCode.message}</span>
+          <span className="text-red-500 text-sm">{errors.phone.countryCode.message}</span>
         )}
         {errors.phone?.number && (
-          <span className="text-red-500 text-xs">{errors.phone.number.message}</span>
+          <span className="text-red-500 text-sm">{errors.phone.number.message}</span>
         )}
       </div>
 
       <FileDropzone
         setUploadedFile={(file) => setValue('documentPhoto', file)}
-        centerText="Drag and drop the Patient Document here, or click to browse files"
+        centerText="Drag and drop the Patient document here, or click to browse files"
       />
     </div>
   );

@@ -38,7 +38,7 @@ export const Modal = ({ show, onClose, content, header, footer }: ModalProps) =>
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <DialogPanel className="relative transform rounded-lg bg-white p-4 text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
+            <DialogPanel className="relative transform rounded-lg bg-white p-4 text-left shadow-xl transition-all w-11/12 sm:w-full sm:max-w-lg">
               <XMarkIcon
                 className="absolute right-4 top-4 h-5 cursor-pointer hover:opacity-80"
                 onClick={onClose}

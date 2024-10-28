@@ -77,7 +77,7 @@ export const PatientCard = ({ patient }: PatientCardProps) => {
       </div>
 
       <div className="flex justify-between items-center p-2">
-        <Subtitle>{patient.name}</Subtitle>
+        <Subtitle className="truncate">{patient.name}</Subtitle>
         <Button className="ml-auto" variant="outline" onClick={toggleExpanded}>
           {isExpanded ? (
             <XMarkIcon className="w-4 h-4" />
